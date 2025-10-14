@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Productos - Inventarios</title>
+  <link rel="stylesheet" href="css/dashboard.css">
+  <link rel="stylesheet" href="css/productos.css">
+</head>
+<body>
+  <header class="header">
+    <h1>📦 Sistema de Inventarios</h1>
+    <button id="logoutBtn" class="logout">Cerrar sesión</button>
+  </header>
+  <script src="js/producto.js" defer></script>
+  <div class="container">
+    <aside class="sidebar">
+      <h2>Menú</h2>
+      <nav>
+        <a href="dashboard.html">Inicio</a>
+        <a href="productos.html" class="active">Productos</a>
+        <a href="entrada.html">Entradas</a>
+        <a href="salida.html">Salidas</a>
+        <a href="reporte.html">Reportes</a>
+      </nav>
+    </aside>
+
+    <main class="content">
+      <h2>📦 Gestión de Productos</h2>
+      <p>Agrega, edita o elimina productos disponibles en el inventario.</p>
+
+      <section class="formulario">
+        <h3>➕ Registrar nuevo producto</h3>
+        <form id="formProducto">
+          <input type="text" id="nombre" placeholder="Nombre del producto" required>
+          <input type="text" id="categoria" placeholder="Categoría" required>
+          <input type="number" id="precio" placeholder="Precio unitario" min="0" required>
+          <button type="submit">Agregar producto</button>
+        </form>
+      </section>
+
+      <section class="tabla-section">
+        <h3>📋 Lista de productos</h3>
+        <table class="tabla" id="tablaProductos">
+          <thead>
+            <tr>
+              <th>Nombre</th>
+              <th>Categoría</th>
+              <th>Precio</th>
+              <th>Acciones</th>
+            </tr>
+          </thead>
+          <tbody>
+            <!-- Se llena con JS -->
+          </tbody>
+        </table>
+      </section>
+    </main>
+  </div>
+</body>
+<footer class="main-footer">
+  <p>© 2025 Mi sitio web. Todos los derechos reservados.</p>
+</footer>
+</html>

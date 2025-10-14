@@ -11,13 +11,14 @@
     <h1>📦 Sistema de Inventarios</h1>
     <button id="logoutBtn" class="logout">Cerrar sesión</button>
   </header>
+  <script src="js/login.js" defer></script>
 
   <div class="container">
     <aside class="sidebar">
       <h2>Menú</h2>
       <nav>
         <a href="#" class="active">Inicio</a>
-        <a href="entradas.html">Productos</a>
+        <a href="productos.html">Productos</a>
         <a href="entrada.html">Entradas</a>
         <a href="salida.html">Salidas</a>
         <a href="reporte.html">Reportes</a>
@@ -56,22 +57,6 @@
       </section>
     </main>
   </div>
-
-  <script>
-    // Evitar acceso directo si no ha iniciado sesión
-    if (!sessionStorage.getItem("loggedIn")) {
-      window.location.href = "login.html";
-    }
-
-    document.getElementById("logoutBtn").addEventListener("click", () => {
-      sessionStorage.removeItem("loggedIn");
-      window.location.href = "login.html";
-    });
-
-    // Mostrar nombre del usuario (si lo guardaste)
-    const username = sessionStorage.getItem("username") || "Administrador";
-    document.getElementById("username").textContent = username;
-  </script>
 </body>
 <footer class="main-footer">
   <p>© 2025 Mi sitio web. Todos los derechos reservados.</p>

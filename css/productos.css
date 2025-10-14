@@ -1,0 +1,117 @@
+.formulario {
+  background: #fff;
+  padding: 15px;
+  border-radius: 10px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+  margin-bottom: 25px;
+}
+
+.formulario form {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.formulario input {
+  padding: 10px;
+  border: 1px solid #cbd5e1;
+  border-radius: 8px;
+  flex: 1;
+  min-width: 150px;
+}
+
+.formulario button {
+  background: #2563eb;
+  color: #fff;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.formulario button:hover {
+  background: #1e40af;
+}
+
+/* Tabla */
+.tabla {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.tabla th,
+.tabla td {
+  border: 1px solid #e2e8f0;
+  padding: 10px;
+  text-align: center;
+}
+
+.tabla th {
+  background: #f1f5f9;
+  color: #334155;
+}
+
+.tabla tr:nth-child(even) {
+  background: #f9fafb;
+}
+
+.empty {
+  text-align: center;
+  color: #6b7280;
+  font-style: italic;
+}
+
+/* Botones */
+.btn-editar, .btn-eliminar {
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  padding: 5px 10px;
+  margin: 0 3px;
+  color: white;
+  font-size: 1rem;
+}
+
+.btn-editar {
+  background: #f59e0b;
+}
+.btn-editar:hover {
+  background: #d97706;
+}
+
+.btn-eliminar {
+  background: #ef4444;
+}
+.btn-eliminar:hover {
+  background: #b91c1c;
+}
+
+/* 🔔 Alertas personalizadas */
+.alerta {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  padding: 12px 20px;
+  border-radius: 8px;
+  color: #fff;
+  background: #16a34a; /* verde por defecto */
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all 0.3s ease;
+  z-index: 9999;
+  font-weight: 500;
+}
+
+.alerta.mostrar {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.alerta.error {
+  background: #dc2626;
+}
+
+.alerta.info {
+  background: #2563eb;
+}
