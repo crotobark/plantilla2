@@ -38,6 +38,7 @@
 .tabla {
   width: 100%;
   border-collapse: collapse;
+  margin-top: 15px;
 }
 
 .tabla th,
@@ -48,12 +49,20 @@
 }
 
 .tabla th {
-  background: #f1f5f9;
-  color: #334155;
+  background: #fef2f2;
+  color: #7f1d1d;
 }
 
 .tabla tr:nth-child(even) {
   background: #f9fafb;
+}
+
+.tabla-wrapper {
+  max-height: 400px; /* altura máxima antes de que aparezca scroll */
+  overflow-y: auto;  /* scroll vertical */
+  overflow-x: auto;  /* scroll horizontal si la tabla es muy ancha */
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
 }
 
 .empty {
@@ -114,4 +123,10 @@
 
 .alerta.info {
   background: #2563eb;
+}
+
+@media (max-width: 600px) {
+  .formulario form {
+    flex-direction: column;
+  }
 }

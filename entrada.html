@@ -18,6 +18,7 @@
       <h2>Menú</h2>
       <nav>
         <a href="dashboard.html">Inicio</a>
+        <a href="productos.html">Productos</a>
         <a href="entrada.html" class="active">Entradas</a>
         <a href="salida.html">Salidas</a>
         <a href="reporte.html">Reportes</a>
@@ -25,41 +26,42 @@
     </aside>
 
     <main class="content">
-      <h2>Registro de Entradas</h2>
-      <p>Agrega nuevos productos o incrementa el stock existente.</p>
+      <div class="content-header">
+        <h2>Registro de Entradas</h2>
+        <form id="entradaForm" class="entrada-form">
+          <div class="form-group">
+            <label for="producto">Nombre del producto</label>
+            <input type="text" id="producto" required>
+          </div>
 
-      <form id="entradaForm" class="entrada-form">
-        <div class="form-group">
-          <label for="producto">Nombre del producto</label>
-          <input type="text" id="producto" required>
-        </div>
+          <div class="form-group">
+            <label for="cantidad">Cantidad</label>
+            <input type="number" id="cantidad" min="1" required>
+          </div>
 
-        <div class="form-group">
-          <label for="cantidad">Cantidad</label>
-          <input type="number" id="cantidad" min="1" required>
-        </div>
+          <div class="form-group">
+            <label for="fecha">Fecha de entrada</label>
+            <input type="date" id="fecha" required>
+          </div>
 
-        <div class="form-group">
-          <label for="fecha">Fecha de entrada</label>
-          <input type="date" id="fecha" required>
-        </div>
-
-        <button type="submit" class="btn">Registrar entrada</button>
-      </form>
-
+          <button type="submit" class="btn">Registrar entrada</button>
+        </form>
+      </div>
       <h3>📋 Entradas registradas</h3>
-      <table id="tablaEntradas" class="tabla">
-        <thead>
-          <tr>
-            <th>Producto</th>
-            <th>Cantidad</th>
-            <th>Fecha</th>
-          </tr>
-        </thead>
-        <tbody>
-          <!-- Se llenará dinámicamente -->
-        </tbody>
-      </table>
+      <div class="tabla-wrapper">
+        <table id="tablaEntradas" class="tabla">
+          <thead>
+            <tr>
+              <th>Producto</th>
+              <th>Cantidad</th>
+              <th>Fecha</th>
+            </tr>
+          </thead>
+          <tbody>
+            <!-- Se llenará dinámicamente -->
+          </tbody>
+        </table>
+      </div>
     </main>
   </div>
 
