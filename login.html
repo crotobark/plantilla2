@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>INVENTARIOS - Login</title>
+  <link rel="stylesheet" href="css/login.css">
+</head>
+<body>
+  <div class="card">
+    <h1>Bienvenido</h1>
+    <p class="lead">Inicia sesión en el sistema de inventarios</p>
+
+    <form id="loginForm">
+      <div class="field">
+        <label for="email">Correo electrónico</label>
+        <input type="email" id="email" placeholder="admin@example.com" required>
+      </div>
+
+      <div class="field">
+        <label for="password">Contraseña</label>
+        <input type="password" id="password" placeholder="••••••••" required>
+      </div>
+
+      <button type="submit" class="btn">Ingresar</button>
+
+      <p id="message" class="message"></p>
+    </form>
+  </div>
+
+  <script>
+    const form = document.getElementById('loginForm');
+    const msg = document.getElementById('message');
+
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+
+      const email = document.getElementById('email').value.trim();
+      const password = document.getElementById('password').value.trim();
+
+      // Datos quemados
+      const user = "admin@admin.com";
+      const pass = "admin";
+
+     if (email === user && password === pass) {
+  msg.textContent = "✅ Inicio de sesión exitoso";
+  msg.className = "message success";
+
+  sessionStorage.setItem("loggedIn", "true");
+  sessionStorage.setItem("username", "Administrador");
+
+  setTimeout(() => {
+    window.location.href = "dashboard.html";
+  }, 1000);
+} else {
+        msg.textContent = "❌ Credenciales incorrectas";
+        msg.className = "message error";
+      }
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Panel de Inventarios</title>
+  <link rel="stylesheet" href="css/dashboard.css">
+</head>
+<body>
+  <header class="header">
+    <h1>📦 Sistema de Inventarios</h1>
+    <button id="logoutBtn" class="logout">Cerrar sesión</button>
+  </header>
+
+  <div class="container">
+    <aside class="sidebar">
+      <h2>Menú</h2>
+      <nav>
+        <a href="#" class="active">Inicio</a>
+        <a href="entradas.html">Productos</a>
+        <a href="entrada.html">Entradas</a>
+        <a href="salida.html">Salidas</a>
+        <a href="reporte.html">Reportes</a>
+      </nav>
+    </aside>
+
+    <main class="content">
+      <h2>Bienvenido, <span id="username">Administrador</span></h2>
+      <p>Has iniciado sesión correctamente.</p>
+
+      <section class="cards">
+        <div class="card">
+          <h3>Productos</h3>
+          <p>Ver y administrar inventario actual.</p>
+        </div>
+        <div class="card">
+          <h3>Entradas</h3>
+          <p>Registrar nuevos productos.</p>
+        </div>
+        <div class="card">
+          <h3>Salidas</h3>
+          <p>Registrar ventas o bajas.</p>
+        </div>
+         <div class="card">
+          <h3>Productos</h3>
+          <p>Ver y administrar inventario actual.</p>
+        </div>
+        <div class="card">
+          <h3>Entradas</h3>
+          <p>Registrar nuevos productos.</p>
+        </div>
+        <div class="card">
+          <h3>Salidas</h3>
+          <p>Registrar ventas o bajas.</p>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script>
+    // Evitar acceso directo si no ha iniciado sesión
+    if (!sessionStorage.getItem("loggedIn")) {
+      window.location.href = "login.html";
+    }
+
+    document.getElementById("logoutBtn").addEventListener("click", () => {
+      sessionStorage.removeItem("loggedIn");
+      window.location.href = "login.html";
+    });
+
+    // Mostrar nombre del usuario (si lo guardaste)
+    const username = sessionStorage.getItem("username") || "Administrador";
+    document.getElementById("username").textContent = username;
+  </script>
+</body>
+<footer class="main-footer">
+  <p>© 2025 Mi sitio web. Todos los derechos reservados.</p>
+</footer>
+</html>

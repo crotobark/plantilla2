@@ -1,0 +1,70 @@
+/* Estilos específicos para la página de reportes */
+
+.resumen {
+  display: flex;
+  gap: 15px;
+  flex-wrap: wrap;
+  margin-bottom: 20px;
+}
+
+.card {
+  background: #ffffff;
+  flex: 1;
+  min-width: 180px;
+  text-align: center;
+  padding: 15px;
+  border-radius: 10px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+}
+
+.card h3 {
+  color: #1e293b;
+  font-size: 1rem;
+  margin-bottom: 8px;
+}
+
+.card p {
+  font-size: 1.5rem;
+  font-weight: 600;
+}
+
+.card:nth-child(1) p {
+  color: #16a34a;
+}
+
+.card:nth-child(2) p {
+  color: #dc2626;
+}
+
+.card:nth-child(3) p {
+  color: #2563eb;
+}
+
+/* Tabla de reportes */
+.tabla {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 10px;
+}
+
+.tabla th,
+.tabla td {
+  border: 1px solid #e2e8f0;
+  padding: 10px;
+  text-align: center;
+}
+
+.tabla th {
+  background: #f1f5f9;
+  color: #334155;
+}
+
+.tabla tr:nth-child(even) {
+  background: #f9fafb;
+}
+
+.empty {
+  text-align: center;
+  color: #6b7280;
+  font-style: italic;
+}

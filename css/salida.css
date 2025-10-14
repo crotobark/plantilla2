@@ -1,0 +1,96 @@
+/* Estilos específicos para la página de Salidas */
+
+.salida-form {
+  background: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  margin: 20px 0;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+  max-width: 500px;
+}
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+label {
+  display: block;
+  font-weight: 600;
+  margin-bottom: 5px;
+  color: #1e293b;
+}
+
+input[type="text"],
+input[type="number"],
+input[type="date"] {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #cbd5e1;
+  border-radius: 6px;
+  font-size: 0.95rem;
+}
+
+input:focus {
+  outline: none;
+  border-color: #dc2626;
+  box-shadow: 0 0 0 2px rgba(220, 38, 38, 0.2);
+}
+
+.btn {
+  background: #dc2626;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  padding: 10px 15px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: background 0.2s;
+}
+
+.btn:hover {
+  background: #b91c1c;
+}
+
+/* Tabla */
+.tabla {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 15px;
+}
+
+.tabla th,
+.tabla td {
+  border: 1px solid #e2e8f0;
+  padding: 10px;
+  text-align: left;
+}
+
+.tabla th {
+  background: #fef2f2;
+  color: #7f1d1d;
+}
+
+.tabla tr:nth-child(even) {
+  background: #f9fafb;
+}
+
+.empty {
+  text-align: center;
+  color: #6b7280;
+  font-style: italic;
+}
+
+/* Botón eliminar */
+.btn-eliminar {
+  background: #f87171;
+  border: none;
+  color: white;
+  border-radius: 4px;
+  padding: 5px 8px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.btn-eliminar:hover {
+  background: #ef4444;
+}

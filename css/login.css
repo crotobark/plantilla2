@@ -1,0 +1,99 @@
+:root {
+  --bg: #f4f6f8;
+  --card: #ffffff;
+  --accent: #2563eb;
+  --danger: #dc2626;
+  --muted: #6b7280;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+  background: linear-gradient(135deg, #e0e7ff 0%, #f8fafc 100%);
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+.card {
+  width: 100%;
+  max-width: 400px;
+  background: var(--card);
+  border-radius: 12px;
+  box-shadow: 0 8px 30px rgba(11, 15, 30, 0.08);
+  padding: 28px;
+  text-align: center;
+}
+
+h1 {
+  margin-bottom: 8px;
+  font-size: 1.5rem;
+  color: #0f172a;
+}
+
+.lead {
+  margin: 0 0 20px 0;
+  color: var(--muted);
+  font-size: 0.95rem;
+}
+
+.field {
+  text-align: left;
+  margin-bottom: 15px;
+}
+
+label {
+  display: block;
+  font-size: 0.85rem;
+  margin-bottom: 6px;
+  color: #334155;
+}
+
+input[type="email"],
+input[type="password"] {
+  width: 100%;
+  padding: 10px 12px;
+  border-radius: 8px;
+  border: 1px solid #e2e8f0;
+  font-size: 0.95rem;
+}
+
+input:focus {
+  border-color: var(--accent);
+  outline: none;
+}
+
+.btn {
+  width: 100%;
+  background: var(--accent);
+  border: none;
+  color: white;
+  padding: 10px;
+  border-radius: 8px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.btn:hover {
+  background: #1e40af;
+}
+
+.message {
+  margin-top: 15px;
+  font-size: 0.9rem;
+}
+
+.message.success {
+  color: green;
+}
+
+.message.error {
+  color: var(--danger);
+}

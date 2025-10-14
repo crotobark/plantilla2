@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Salidas - Inventarios</title>
+  <link rel="stylesheet" href="css/dashboard.css">
+  <link rel="stylesheet" href="css/salida.css">
+</head>
+<body>
+  <header class="header">
+    <h1>📦 Sistema de Inventarios</h1>
+    <button id="logoutBtn" class="logout">Cerrar sesión</button>
+  </header>
+
+  <div class="container">
+    <aside class="sidebar">
+      <h2>Menú</h2>
+      <nav>
+        <a href="dashboard.html">Inicio</a>
+        <a href="entrada.html">Entradas</a>
+        <a href="salida.html" class="active">Salidas</a>
+        <a href="reporte.html">Reportes</a>
+      </nav>
+    </aside>
+
+    <main class="content">
+      <h2>Registro de Salidas</h2>
+      <p>Registra los productos que han salido del inventario.</p>
+
+      <form id="salidaForm" class="salida-form">
+        <div class="form-group">
+          <label for="producto">Nombre del producto</label>
+          <input type="text" id="producto" required>
+        </div>
+
+        <div class="form-group">
+          <label for="cantidad">Cantidad</label>
+          <input type="number" id="cantidad" min="1" required>
+        </div>
+
+        <div class="form-group">
+          <label for="fecha">Fecha de salida</label>
+          <input type="date" id="fecha" required>
+        </div>
+
+        <button type="submit" class="btn">Registrar salida</button>
+      </form>
+
+      <h3>📋 Salidas registradas</h3>
+      <table id="tablaSalidas" class="tabla">
+        <thead>
+          <tr>
+            <th>Producto</th>
+            <th>Cantidad</th>
+            <th>Fecha</th>
+            <th>Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- Se llenará dinámicamente -->
+        </tbody>
+      </table>
+    </main>
+  </div>
+
+  <script>
+    // Protección de sesión
+    if (!sessionStorage.getItem("loggedIn")) {
+      window.location.href = "login.html";
+    }
+
+    // Cerrar sesión
+    document.getElementById("logoutBtn").addEventListener("click", () => {
+      sessionStorage.removeItem("loggedIn");
+      window.location.href = "login.html";
+    });
+
+    const form = document.getElementById('salidaForm');
+    const tabla = document.getElementById('tablaSalidas').querySelector('tbody');
+
+    // Cargar las salidas guardadas
+    const salidas = JSON.parse(localStorage.getItem('salidas') || '[]');
+    renderSalidas();
+
+    // Agregar salida
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+
+      const producto = document.getElementById('producto').value.trim();
+      const cantidad = parseInt(document.getElementById('cantidad').value);
+      const fecha = document.getElementById('fecha').value;
+
+      if (!producto || cantidad <= 0 || !fecha) return;
+
+      salidas.push({ id: Date.now(), producto, cantidad, fecha });
+      localStorage.setItem('salidas', JSON.stringify(salidas));
+      renderSalidas();
+      form.reset();
+    });
+
+    // Renderizar tabla
+    function renderSalidas() {
+      tabla.innerHTML = salidas.length
+        ? salidas.map(e => `
+            <tr>
+              <td>${e.producto}</td>
+              <td>${e.cantidad}</td>
+              <td>${e.fecha}</td>
+              <td>
+                <button class="btn-eliminar" onclick="eliminarSalida(${e.id})">🗑️</button>
+              </td>
+            </tr>
+          `).join('')
+        : '<tr><td colspan="4" class="empty">No hay salidas registradas.</td></tr>';
+    }
+
+    // Eliminar salida
+    function eliminarSalida(id) {
+      const index = salidas.findIndex(e => e.id === id);
+      if (index >= 0) {
+        if (confirm("¿Deseas eliminar esta salida?")) {
+          salidas.splice(index, 1);
+          localStorage.setItem('salidas', JSON.stringify(salidas));
+          renderSalidas();
+        }
+      }
+    }
+
+    // Hacer disponible la función en el scope global
+    window.eliminarSalida = eliminarSalida;
+  </script>
+</body>
+<footer class="main-footer">
+  <p>© 2025 Mi sitio web. Todos los derechos reservados.</p>
+</footer>
+</html>
