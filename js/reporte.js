@@ -1,109 +1,106 @@
-    // Protección de sesión
-    if (!sessionStorage.getItem("loggedIn")) {
-      window.location.href = "login.html";
-    }
+// ============================
+// Reporte de Inventario
+// ============================
 
-    document.getElementById("logoutBtn").addEventListener("click", () => {
-      sessionStorage.removeItem("loggedIn");
-      window.location.href = "login.html";
-    });
+// Cerrar sesión
+document.getElementById("logoutBtn").addEventListener("click", () => {
+  sessionStorage.removeItem("loggedIn");
+  window.location.href = "login.html";
+});
 
-    const entradas = JSON.parse(localStorage.getItem('entradas') || '[]');
-    const salidas = JSON.parse(localStorage.getItem('salidas') || '[]');
+// Leer datos de movimientos e inventario
+const movimientos = JSON.parse(localStorage.getItem("movimientos")) || [];
+const inventario = JSON.parse(localStorage.getItem("inventario")) || {};
+const tablaBody = document.querySelector("#tablaReportes tbody");
 
-    const resumen = {};
-    let totalEntradas = 0;
-    let totalSalidas = 0;
+// Variables acumuladoras
+let totalEntradas = 0;
+let totalSalidas = 0;
 
-    entradas.forEach(e => {
-      totalEntradas += e.cantidad;
-      if (!resumen[e.producto]) resumen[e.producto] = { entradas: 0, salidas: 0 };
-      resumen[e.producto].entradas += e.cantidad;
-    });
+// Objeto temporal para consolidar los datos
+const resumen = {};
 
-    salidas.forEach(s => {
-      totalSalidas += s.cantidad;
-      if (!resumen[s.producto]) resumen[s.producto] = { entradas: 0, salidas: 0 };
-      resumen[s.producto].salidas += s.cantidad;
-    });
+movimientos.forEach(m => {
+  if (!resumen[m.producto]) {
+    resumen[m.producto] = { entradas: 0, salidas: 0, stock: 0 };
+  }
 
-    let totalStock = 0;
-    const tbody = document.querySelector("#tablaReportes tbody");
+  if (m.tipo === "entrada") {
+    resumen[m.producto].entradas += m.cantidad;
+    totalEntradas += m.cantidad;
+  } else {
+    resumen[m.producto].salidas += m.cantidad;
+    totalSalidas += m.cantidad;
+  }
+});
 
-    if (Object.keys(resumen).length > 0) {
-      tbody.innerHTML = Object.entries(resumen)
-        .map(([producto, datos]) => {
-          const stock = datos.entradas - datos.salidas;
-          totalStock += stock;
-          return `
-            <tr>
-              <td>${producto}</td>
-              <td>${datos.entradas}</td>
-              <td>${datos.salidas}</td>
-              <td>${stock >= 0 ? stock : 0}</td>
-            </tr>
-          `;
-        })
-        .join('');
-    } else {
-      tbody.innerHTML = `<tr><td colspan="4" class="empty">No hay datos para mostrar.</td></tr>`;
-    }
+// Calcular stock actual
+for (const producto in resumen) {
+  resumen[producto].stock =
+    (inventario[producto] !== undefined) ? inventario[producto] : resumen[producto].entradas - resumen[producto].salidas;
+}
 
-    document.getElementById("totalEntradas").textContent = totalEntradas;
-    document.getElementById("totalSalidas").textContent = totalSalidas;
-    document.getElementById("totalStock").textContent = totalStock;
+// Mostrar datos en tabla
+Object.keys(resumen).forEach(producto => {
+  const { entradas, salidas, stock } = resumen[producto];
+  const fila = document.createElement("tr");
+  fila.innerHTML = `
+    <td>${producto}</td>
+    <td>${entradas}</td>
+    <td>${salidas}</td>
+    <td>${stock}</td>
+  `;
+  tablaBody.appendChild(fila);
+});
 
-    // =============================
-    // EXPORTAR A EXCEL
-    // =============================
-    document.getElementById("btnExcel").addEventListener("click", () => {
-      let csvContent = "data:text/csv;charset=utf-8,";
-      csvContent += "Producto,Entradas,Salidas,Stock\n";
+// Totales generales
+document.getElementById("totalEntradas").textContent = totalEntradas;
+document.getElementById("totalSalidas").textContent = totalSalidas;
+document.getElementById("totalStock").textContent = Object.values(inventario).reduce((a, b) => a + b, 0);
 
-      Object.entries(resumen).forEach(([producto, datos]) => {
-        const stock = datos.entradas - datos.salidas;
-        csvContent += `${producto},${datos.entradas},${datos.salidas},${stock}\n`;
-      });
+// ============================
+// Exportar a Excel
+// ============================
+document.getElementById("btnExcel").addEventListener("click", () => {
+  const wb = XLSX.utils.book_new();
+  const datos = [["Producto", "Entradas", "Salidas", "Stock Actual"]];
 
-      const encodedUri = encodeURI(csvContent);
-      const link = document.createElement("a");
-      link.setAttribute("href", encodedUri);
-      link.setAttribute("download", "reporte_inventario.csv");
-      document.body.appendChild(link);
-      link.click();
-      document.body.removeChild(link);
-    });
+  Object.keys(resumen).forEach(p => {
+    const { entradas, salidas, stock } = resumen[p];
+    datos.push([p, entradas, salidas, stock]);
+  });
 
-    // =============================
-    // EXPORTAR A PDF
-    // =============================
-    document.getElementById("btnPDF").addEventListener("click", async () => {
-      const { jsPDF } = window.jspdf;
-      const doc = new jsPDF();
+  const ws = XLSX.utils.aoa_to_sheet(datos);
+  XLSX.utils.book_append_sheet(wb, ws, "Reporte Inventario");
+  XLSX.writeFile(wb, "Reporte_Inventario.xlsx");
+});
 
-      doc.setFontSize(16);
-      doc.text("Reporte General de Inventario", 14, 15);
-      doc.setFontSize(11);
-      doc.text(`Fecha: ${new Date().toLocaleDateString()}`, 14, 25);
+// ============================
+// Exportar a PDF
+// ============================
+document.getElementById("btnPDF").addEventListener("click", () => {
+  const { jsPDF } = window.jspdf;
+  const doc = new jsPDF();
 
-      let y = 35;
-      doc.text("Producto        Entradas    Salidas    Stock", 14, y);
-      y += 5;
+  doc.setFontSize(14);
+  doc.text("Reporte General de Inventario", 14, 15);
 
-      Object.entries(resumen).forEach(([producto, datos]) => {
-        const stock = datos.entradas - datos.salidas;
-        doc.text(
-          `${producto.padEnd(15)} ${String(datos.entradas).padEnd(10)} ${String(datos.salidas).padEnd(10)} ${stock}`,
-          14,
-          y
-        );
-        y += 6;
-      });
+  let y = 30;
+  doc.setFontSize(10);
+  doc.text("Producto", 14, y);
+  doc.text("Entradas", 70, y);
+  doc.text("Salidas", 110, y);
+  doc.text("Stock", 160, y);
+  y += 8;
 
-      doc.text(`\nTotal Entradas: ${totalEntradas}`, 14, y + 10);
-      doc.text(`Total Salidas: ${totalSalidas}`, 14, y + 16);
-      doc.text(`Stock Actual: ${totalStock}`, 14, y + 22);
+  Object.keys(resumen).forEach(p => {
+    const { entradas, salidas, stock } = resumen[p];
+    doc.text(p, 14, y);
+    doc.text(String(entradas), 70, y);
+    doc.text(String(salidas), 110, y);
+    doc.text(String(stock), 160, y);
+    y += 8;
+  });
 
-      doc.save("reporte_inventario.pdf");
-    });
-  
+  doc.save("Reporte_Inventario.pdf");
+});

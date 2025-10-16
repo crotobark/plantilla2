@@ -1,0 +1,159 @@
+/* ===============================
+   MOVIMIENTOS - Estilo coherente con dashboard.css y reporte.css
+   =============================== */
+
+:root {
+  --primary: #1e3a8a;
+  --light-bg: #f4f6fb;
+  --white: #ffffff;
+  --shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+body {
+  margin: 0;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  background: var(--light-bg);
+}
+
+.content {
+  padding: 20px;
+  flex: 1;
+  background: var(--light-bg);
+  min-height: calc(100vh - 60px);
+}
+
+.content h2 {
+  color: var(--primary);
+  margin-bottom: 10px;
+}
+
+.content p {
+  color: #555;
+  margin-bottom: 20px;
+}
+
+/* ===== FORMULARIO ===== */
+.form-movimiento {
+  background: var(--white);
+  border-radius: 12px;
+  padding: 25px;
+  box-shadow: var(--shadow);
+  margin-bottom: 30px;
+}
+
+.form-movimiento h3 {
+  color: var(--primary);
+  margin-bottom: 20px;
+}
+
+.form-group {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 15px;
+  margin-bottom: 15px;
+}
+
+.form-group label {
+  width: 180px;
+  font-weight: 600;
+  color: #333;
+}
+
+.form-group select,
+.form-group input {
+  flex: 1;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 15px;
+  transition: border-color 0.2s ease;
+}
+
+.form-group select:focus,
+.form-group input:focus {
+  outline: none;
+  border-color: var(--primary);
+}
+
+.botones {
+  margin-top: 20px;
+  display: flex;
+  gap: 10px;
+}
+
+.btn-registrar {
+  background: var(--primary);
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.btn-registrar:hover {
+  background: #162b6f;
+}
+
+.btn-limpiar {
+  background: #9ca3af;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.btn-limpiar:hover {
+  background: #6b7280;
+}
+
+/* ===== TABLA ===== */
+.tabla-movimientos {
+  width: 100%;
+  border-collapse: collapse;
+  background: var(--white);
+  border-radius: 12px;
+  box-shadow: var(--shadow);
+  overflow: hidden;
+}
+
+.tabla-movimientos th,
+.tabla-movimientos td {
+  border: 1px solid #e5e7eb;
+  padding: 12px;
+  text-align: center;
+}
+
+.tabla-movimientos th {
+  background: var(--primary);
+  color: white;
+  font-weight: 600;
+}
+
+.tabla-movimientos tr:nth-child(even) {
+  background: #f9fafb;
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 768px) {
+  .form-group {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .form-group label {
+    width: 100%;
+  }
+
+  .botones {
+    flex-direction: column;
+  }
+
+  .btn-registrar,
+  .btn-limpiar {
+    width: 100%;
+  }
+}

@@ -4,26 +4,27 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Reportes - Inventarios</title>
+
   <link rel="stylesheet" href="css/dashboard.css">
   <link rel="stylesheet" href="css/reporte.css">
 
-  <!-- jsPDF CDN -->
+  <!-- Librerías externas -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
 </head>
 <body>
   <header class="header">
     <h1>📊 Sistema de Inventarios</h1>
     <button id="logoutBtn" class="logout">Cerrar sesión</button>
   </header>
-    <script src="js/reporte.js" defer></script>
+
   <div class="container">
     <aside class="sidebar">
       <h2>Menú</h2>
       <nav>
         <a href="dashboard.html">Inicio</a>
         <a href="productos.html">Productos</a>
-        <a href="entrada.html">Entradas</a>
-        <a href="salida.html">Salidas</a>
+        <a href="movimientos.html">Movimientos</a>
         <a href="reporte.html" class="active">Reportes</a>
       </nav>
     </aside>
@@ -46,12 +47,22 @@
           <p id="totalStock">0</p>
         </div>
       </div>
-
+<!--
       <div class="botones">
         <button id="btnExcel" class="btn-excel">⬇️ Descargar Excel</button>
         <button id="btnPDF" class="btn-pdf">⬇️ Descargar PDF</button>
       </div>
-
+-->
+    <div class="titulo"> DESCARGAR
+      <div class="botones">
+        <button id="btnExcel" class="btn-excel">
+          <img src="img/excel.png" alt="Excel" class="icono-btn">
+        </button>
+        <button id="btnPDF" class="btn-pdf">
+          <img src="img/pdf.png" alt="PDF" class="icono-btn">
+        </button>
+      </div>
+    </div>  
       <h3>📋 Detalle de productos</h3>
       <table class="tabla" id="tablaReportes">
         <thead>
@@ -68,8 +79,10 @@
       </table>
     </main>
   </div>
+
+  <script src="js/reporte.js" defer></script>
 </body>
+  <footer class="main-footer">
+    <p>© 2025 Mi sitio web. Todos los derechos reservados.</p>
+  </footer>
 </html>
-    <footer class="main-footer">
-        <p>© 2025 Mi sitio web. Todos los derechos reservados.</p>
-    </footer>

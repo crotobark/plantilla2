@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Movimientos - Inventarios</title>
+  <link rel="stylesheet" href="css/dashboard.css">
+  <link rel="stylesheet" href="css/movimientos.css">
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+
+</head>
+<body>
+  <header class="header">
+    <h1>📦 Sistema de Inventarios</h1>
+    <button id="logoutBtn" class="logout">Cerrar sesión</button>
+  </header>
+
+  <div class="container">
+    <aside class="sidebar">
+      <h2>Menú</h2>
+      <nav>
+        <a href="dashboard.html">Inicio</a>
+        <a href="productos.html">Productos</a>
+        <a href="movimientos.html" class="active">Movimientos</a>
+        <a href="reporte.html">Reportes</a>
+      </nav>
+    </aside>
+
+    <main class="content">
+      <h2>📦 Registro de Movimientos</h2>
+      <p>Selecciona el tipo de movimiento y registra entradas o salidas del inventario.</p>
+
+      <form id="formMovimiento" class="form-movimiento">
+        <h3>Nuevo Movimiento</h3>
+
+        <div class="form-group">
+          <label for="tipo">Tipo de movimiento</label>
+          <select id="tipo" required>
+            <option value="entrada">Entrada</option>
+            <option value="salida">Salida</option>
+          </select>
+        </div>
+
+        <!-- CAMPO DE PRODUCTO CON SELECT -->
+        <div class="form-group">
+          <label for="producto">Producto</label>
+          <select id="producto" required>
+            <option value="">Seleccione un producto</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="cantidad">Cantidad</label>
+          <input type="number" id="cantidad" min="1" placeholder="Cantidad" required>
+        </div>
+
+        <div class="form-group">
+          <label for="fecha">Fecha</label>
+          <input type="date" id="fecha" required>
+        </div>
+
+        <div class="botones">
+          <button type="submit" class="btn-registrar">💾 Registrar</button>
+          <button type="button" class="btn-limpiar" id="btnLimpiar">🧹 Limpiar</button>
+        </div>
+      </form>
+
+      <h3>📋 Historial de Movimientos</h3>
+      <table class="tabla-movimientos" id="tablaMovimientos">
+        <thead>
+          <tr>
+            <th>Fecha</th>
+            <th>Tipo</th>
+            <th>Producto</th>
+            <th>Cantidad</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- Se llenará dinámicamente -->
+        </tbody>
+      </table>
+    </main>
+  </div>
+
+  <footer class="main-footer">
+    <p>© 2025 Mi sitio web. Todos los derechos reservados.</p>
+  </footer>
+
+  <script src="js/movimientos.js"></script>
+</body>
+</html>
