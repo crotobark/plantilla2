@@ -2,8 +2,6 @@
 // MOVIMIENTOS.JS
 // ============================
 
-
-
 // Cargar productos desde localStorage
 function cargarProductos() {
   const productosGuardados = JSON.parse(localStorage.getItem("productos")) || [];
@@ -80,7 +78,7 @@ document.getElementById("btnLimpiar").addEventListener("click", () => {
   document.getElementById("formMovimiento").reset();
 });
 
-// Registrar movimiento
+// Registrar movimiento con validación de stock
 document.getElementById("formMovimiento").addEventListener("submit", e => {
   e.preventDefault();
 
@@ -98,6 +96,37 @@ document.getElementById("formMovimiento").addEventListener("submit", e => {
     return;
   }
 
+  // ==========================
+  // VALIDAR STOCK DISPONIBLE
+  // ==========================
+  const movimientos = JSON.parse(localStorage.getItem("movimientos")) || [];
+
+  let entradas = 0;
+  let salidas = 0;
+
+  movimientos.forEach(m => {
+    if (m.producto === producto) {
+      if (m.tipo === "entrada") entradas += m.cantidad;
+      else if (m.tipo === "salida") salidas += m.cantidad;
+    }
+  });
+
+  const stockDisponible = entradas - salidas;
+
+  if (tipo === "salida" && cantidad > stockDisponible) {
+    Swal.fire({
+      title: "⚠️ Stock insuficiente",
+      text: `No puedes registrar una salida de ${cantidad} unidades. 
+El stock disponible para "${producto}" es de ${stockDisponible}.`,
+      icon: "warning",
+      confirmButtonText: "Entendido"
+    });
+    return; // ❌ No guarda el movimiento
+  }
+
+  // ==========================
+  // GUARDAR EL NUEVO MOVIMIENTO
+  // ==========================
   const nuevoMovimiento = { tipo, producto, cantidad, fecha };
   guardarMovimiento(nuevoMovimiento);
 
@@ -109,8 +138,7 @@ document.getElementById("formMovimiento").addEventListener("submit", e => {
     title: "✅ Movimiento registrado con éxito",
     icon: "success",
     timer: 1500,
-    showConfirmButton: false,
-    scrollbarPadding: false
+    showConfirmButton: false
   });
 });
 

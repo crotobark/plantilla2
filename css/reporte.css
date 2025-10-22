@@ -98,7 +98,7 @@
   }
 
   .btn-excel:hover img {
-    transform: scale(1.5);
+    transform: scale(1.2);
   }
 
     /*Estilo para el boton PDF*/
@@ -117,7 +117,7 @@
   }
 
   .btn-pdf:hover img {
-    transform: scale(1.5);
+    transform: scale(1.2);
   }
 
   .icono-btn {
