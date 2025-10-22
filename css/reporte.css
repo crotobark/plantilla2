@@ -81,40 +81,51 @@
   gap: 10px;
   margin-top: 15px;
 
-  .btn-excel{
-    background-color: #2563eb;
-    color: rgb(255, 255, 255);
-    padding: 8px 12px;
-    border: none;
-    border-radius: 5px;
+
+  /*Estilo para el boton EXCEL*/
+  .btn-excel {
+    background: none;         
+    border: none;                
     cursor: pointer;
-    font-size: 0.9rem;
-    transition: background-color 0.3s ease;
+    padding: 0;                  
   }
-  .btn-excel:hover{
-    background-color: #15803d;
+
+  .btn-excel img {
+    width: 45px;                
+    height: auto;                
+    display: block;
+    transition: transform 0.2s ease;
   }
-  .btn-pdf{
-    background: url('img/.btn-pdf.png') no-repeat 10px center;
-    background-color: #2563eb;
-    color: rgb(255, 255, 255);
-    padding: 8px 12px;
-    border: none;
-    border-radius: 5px;
+
+  .btn-excel:hover img {
+    transform: scale(1.5);
+  }
+
+    /*Estilo para el boton PDF*/
+  .btn-pdf {
+    background: none;         
+    border: none;                
     cursor: pointer;
-    font-size: 0.9rem;
-    transition: background-color 0.3s ease;
-    box-shadow: #1e293b;
+    padding: 0;                  
   }
-  .btn-pdf:hover{
-    background-color: #b91c1c;
+
+  .btn-pdf img {
+    width: 45px;                
+    height: auto;                
+    display: block;
+    transition: transform 0.2s ease;
   }
-   .icono-btn{
+
+  .btn-pdf:hover img {
+    transform: scale(1.5);
+  }
+
+  .icono-btn {
     width: 30px;
     height: 30px;
     vertical-align: middle;
     margin-right: 8px;
-}
+  }
 }
 .titulo{
   text-align: center;
