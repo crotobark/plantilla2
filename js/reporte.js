@@ -104,3 +104,57 @@ document.getElementById("btnPDF").addEventListener("click", () => {
 
   doc.save("Reporte_Inventario.pdf");
 });
+
+// ============================
+// GRÁFICA DE PASTEL (Chart.js)
+// ============================
+
+// Obtener los valores actuales de los totales
+const totalEntradasVal = totalEntradas;
+const totalSalidasVal = totalSalidas;
+const totalStockVal = Object.values(inventario).reduce((a, b) => a + b, 0);
+
+// Crear la gráfica
+const ctx = document.getElementById("graficaResumen").getContext("2d");
+
+const grafica = new Chart(ctx, {
+  type: "pie",
+  data: {
+    labels: ["Entradas", "Salidas", "Stock Actual"],
+    datasets: [
+      {
+        label: "Resumen de Inventario",
+        data: [totalEntradasVal, totalSalidasVal, totalStockVal],
+        backgroundColor: [
+          "rgba(54, 162, 235, 0.7)",  // Azul - Entradas
+          "rgba(255, 99, 132, 0.7)",  // Rojo - Salidas
+          "rgba(75, 192, 192, 0.7)"   // Verde - Stock
+        ],
+        borderColor: [
+          "rgba(54, 162, 235, 1)",
+          "rgba(255, 99, 132, 1)",
+          "rgba(75, 192, 192, 1)"
+        ],
+        borderWidth: 2
+      }
+    ]
+  },
+  options: {
+    responsive: true,
+    plugins: {
+      legend: {
+        position: "bottom",
+        labels: {
+          color: "#333",
+          font: { size: 14 }
+        }
+      },
+      title: {
+        display: true,
+        text: "Distribución general del inventario",
+        color: "#111",
+        font: { size: 16, weight: "bold" }
+      }
+    }
+  }
+});

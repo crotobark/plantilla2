@@ -180,3 +180,42 @@ body {
   color: white;
   border-color: #0d6efd;
 }
+
+.link-card {
+  text-decoration: none;
+  color: inherit;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.link-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.grafico {
+  background: #ffffff;
+  border-radius: 10px;
+  padding: 30px 20px;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+  margin-top: 30px;
+}
+
+.grafico h3 {
+  text-align: center;
+  color: #1e3a8a;
+  margin-bottom: 20px;
+  font-size: 1.3rem;
+}
+
+.grafico-contenedor {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+#graficaDashboard {
+  width: 100% !important;
+  height: 380px !important;
+}

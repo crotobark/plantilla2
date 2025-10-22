@@ -117,3 +117,15 @@
   color: #1e293b;
   margin-bottom: 10px;
 }
+
+.resumen {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 30px 0;
+}
+
+#graficaResumen {
+  max-width: 400px;
+  max-height: 400px;
+}

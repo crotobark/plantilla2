@@ -50,6 +50,7 @@ form.addEventListener('submit', e => {
   const categoria = document.getElementById('categoria').value.trim();
   const precio = parseFloat(document.getElementById('precio').value);
 
+  // Validar campos vacíos
   if (!nombre || !categoria || isNaN(precio)) {
     Swal.fire({
       title: "Error",
@@ -60,10 +61,28 @@ form.addEventListener('submit', e => {
     return;
   }
 
+  // Validar duplicado (mismo nombre, categoría y precio)
+  const existe = productos.some(p =>
+    p.nombre.toLowerCase() === nombre.toLowerCase() &&
+    p.categoria.toLowerCase() === categoria.toLowerCase() &&
+    p.precio === precio
+  );
+
+  if (existe) {
+    Swal.fire({
+      title: "⚠️ Producto duplicado",
+      text: "Este producto ya fue registrado anteriormente.",
+      icon: "warning",
+      scrollbarPadding: false
+    });
+    return;
+  }
+
+  // Si no existe, se agrega
   productos.push({ nombre, categoria, precio });
   guardarProductos();
-
   form.reset();
+
   Swal.fire({
     title: "✅ Producto agregado con éxito",
     icon: "success",
@@ -72,6 +91,9 @@ form.addEventListener('submit', e => {
     scrollbarPadding: false
   });
 });
+
+renderTabla();
+
 
 // =============================
 // ELIMINAR PRODUCTO (SweetAlert2)

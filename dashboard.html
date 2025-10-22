@@ -8,7 +8,7 @@
 </head>
 <body>
   <header class="header">
-    <h1>📦 Sistema de Inventarios</h1>
+    <h1>Sistema de Inventarios</h1>
     <button id="logoutBtn" class="logout">Cerrar sesión</button>
   </header>
   <script src="js/login.js" defer></script>
@@ -27,33 +27,55 @@
     <main class="content">
       <h2>Bienvenido, <span id="username">Administrador</span></h2>
       
+      <section class="bienvenida">
+        <h3>👋 ¡Hola, <span id="username">Administrador</span>!</h3>
+      </section>
 
-      <section class="cards">
-        <div class="card">
-          <h3>Productos</h3>
-          <p>Ver y administrar inventario actual.</p>
-        </div>
-        <div class="card">
-          <h3>Entradas</h3>
-          <p>Registrar nuevos productos.</p>
-        </div>
-        <div class="card">
-          <h3>Salidas</h3>
-          <p>Registrar ventas o bajas.</p>
-        </div>
-         <div class="card">
-          <h3>Productos</h3>
-          <p>Ver y administrar inventario actual.</p>
-        </div>
-        <div class="card">
-          <h3>Entradas</h3>
-          <p>Registrar nuevos productos.</p>
-        </div>
-        <div class="card">
-          <h3>Salidas</h3>
-          <p>Registrar ventas o bajas.</p>
+      <section class="cards acceso-rapido">
+        <a href="productos.html" class="card link-card">
+          <h3>🛒 Productos</h3>
+          <p>Ver, agregar o editar productos.</p>
+        </a>
+
+        <a href="movimientos.html" class="card link-card">
+          <h3>🔁 Movimientos</h3>
+          <p>Registrar entradas y salidas del inventario.</p>
+        </a>
+
+        <a href="reporte.html" class="card link-card">
+          <h3>📈 Reportes</h3>
+          <p>Consultar reportes y descargar en Excel o PDF.</p>
+        </a>
+      </section>
+
+      <section class="grafico">
+        <h3>📊 Resumen general del inventario</h3>
+        <div class="grafico-contenedor">
+          <canvas id="graficaDashboard"></canvas>
         </div>
       </section>
+
+
+      <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+      <script>
+        const ctx = document.getElementById('graficaDashboard').getContext('2d');
+        new Chart(ctx, {
+          type: 'bar',
+          data: {
+            labels: ['Entradas', 'Salidas', 'Stock'],
+            datasets: [{
+              label: 'Inventario',
+              data: [50, 30, 100], // ← aquí puedes traer valores reales
+              backgroundColor: ['#3b82f6', '#ef4444', '#10b981']
+            }]
+          },
+          options: {
+            responsive: true,
+            plugins: { legend: { display: false } },
+            scales: { y: { beginAtZero: true } }
+          }
+        });
+      </script>
     </main>
   </div>
 </body>

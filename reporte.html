@@ -34,7 +34,8 @@
       <p>Resumen consolidado de entradas, salidas y stock actual por producto.</p>
 
       <div class="resumen">
-        <div class="card">
+        <canvas id="graficaResumen" width="300" height="300">
+          <div class="card">
           <h3>🔼 Entradas</h3>
           <p id="totalEntradas">0</p>
         </div>
@@ -46,13 +47,10 @@
           <h3>⚖️ Stock Actual</h3>
           <p id="totalStock">0</p>
         </div>
+        </canvas>
       </div>
-<!--
-      <div class="botones">
-        <button id="btnExcel" class="btn-excel">⬇️ Descargar Excel</button>
-        <button id="btnPDF" class="btn-pdf">⬇️ Descargar PDF</button>
-      </div>
--->
+
+
     <div class="titulo"> DESCARGAR
       <div class="botones">
         <button id="btnExcel" class="btn-excel">
@@ -80,6 +78,7 @@
     </main>
   </div>
 
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <script src="js/reporte.js" defer></script>
 </body>
   <footer class="main-footer">
