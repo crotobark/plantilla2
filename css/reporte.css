@@ -1,5 +1,11 @@
 /* Estilos específicos para la página de reportes */
 
+:root {
+  --primary: #1e3a8a;
+  --light-bg: #f4f6fb;
+  --white: #ffffff;
+  --shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
 .resumen {
   display: flex;
   gap: 15px;
@@ -129,3 +135,31 @@
   max-width: 400px;
   max-height: 400px;
 }
+/* ====== Paginación ====== */
+.paginacion {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin: 25px 0 40px;
+}
+
+.btn-pagina {
+  background-color: #1e3a8a;
+  color: rgb(0, 0, 0);
+  border: none;
+  padding: 8px 14px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  font-weight: 600;
+}
+
+.btn-pagina:hover {
+  background-color: #2563eb;
+}
+
+.btn-pagina.active {
+  background-color: #10b981;
+}
+
+

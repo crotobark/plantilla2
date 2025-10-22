@@ -158,3 +158,84 @@ const grafica = new Chart(ctx, {
     }
   }
 });
+
+// =============================
+// PAGINACIÓN DE REPORTES
+// =============================
+
+let paginaActualReportes = 1;
+const filasPorPagina = 10;
+let datosReportes = []; // 👈 se llenará con los datos actuales
+
+function renderTablaReportes() {
+  const tbody = document.querySelector("#tablaReportes tbody");
+  tbody.innerHTML = "";
+
+  if (datosReportes.length === 0) {
+    tbody.innerHTML = `<tr><td colspan="4">No hay datos para mostrar</td></tr>`;
+    return;
+  }
+
+  const inicio = (paginaActualReportes - 1) * filasPorPagina;
+  const fin = inicio + filasPorPagina;
+  const pagina = datosReportes.slice(inicio, fin);
+
+  pagina.forEach(item => {
+    const fila = document.createElement("tr");
+    fila.innerHTML = `
+      <td>${item.producto}</td>
+      <td>${item.totalEntradas}</td>
+      <td>${item.totalSalidas}</td>
+      <td>${item.stockActual}</td>
+    `;
+    tbody.appendChild(fila);
+  });
+
+  crearPaginacionReportes(datosReportes.length);
+}
+
+function crearPaginacionReportes(total) {
+  const totalPaginas = Math.ceil(total / filasPorPagina);
+  const contenedor = document.getElementById("paginacionReportes");
+  contenedor.innerHTML = "";
+
+  for (let i = 1; i <= totalPaginas; i++) {
+    const btn = document.createElement("button");
+    btn.textContent = i;
+    btn.classList.add("btn-pagina");
+    if (i === paginaActualReportes) btn.classList.add("active");
+
+    btn.addEventListener("click", () => {
+      paginaActualReportes = i;
+      renderTablaReportes();
+    });
+
+    contenedor.appendChild(btn);
+  }
+}
+
+// =============================
+// FUNCIÓN ORIGINAL QUE GENERA DATOS
+// =============================
+function generarReporte() {
+  const movimientos = JSON.parse(localStorage.getItem("movimientos")) || [];
+
+  const resumen = {};
+
+  movimientos.forEach(m => {
+    if (!resumen[m.producto]) resumen[m.producto] = { entradas: 0, salidas: 0 };
+    if (m.tipo === "entrada") resumen[m.producto].entradas += m.cantidad;
+    else resumen[m.producto].salidas += m.cantidad;
+  });
+
+  datosReportes = Object.entries(resumen).map(([producto, data]) => ({
+    producto,
+    totalEntradas: data.entradas,
+    totalSalidas: data.salidas,
+    stockActual: data.entradas - data.salidas
+  }));
+
+  renderTablaReportes(); // 👈 se llama la paginación aquí
+}
+
+document.addEventListener("DOMContentLoaded", generarReporte);

@@ -2,9 +2,7 @@
 // MOVIMIENTOS.JS
 // ============================
 
-// Variables de paginación
-let paginaActual = 1;
-const movimientosPorPagina = 10;
+
 
 // Cargar productos desde localStorage
 function cargarProductos() {
@@ -29,6 +27,10 @@ function guardarMovimiento(movimiento) {
   movimientos.push(movimiento);
   localStorage.setItem("movimientos", JSON.stringify(movimientos));
 }
+
+// Variables de paginación
+let paginaActual = 1;
+const movimientosPorPagina = 10;
 
 // Mostrar movimientos en la tabla con paginación
 function mostrarMovimientos() {

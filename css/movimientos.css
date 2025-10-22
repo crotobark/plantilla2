@@ -17,6 +17,7 @@ body {
 
 .content {
   padding: 20px;
+  padding-bottom: 100px;
   flex: 1;
   background: var(--light-bg);
   min-height: calc(100vh - 60px);
@@ -156,4 +157,31 @@ body {
   .btn-limpiar {
     width: 100%;
   }
+}
+
+/* ====== Paginación ====== */
+.paginacion {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin: 25px 0 40px;
+}
+
+.btn-pagina {
+  background-color: #1e3a8a;
+  color: rgb(0, 0, 0);
+  border: none;
+  padding: 8px 14px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  font-weight: 600;
+}
+
+.btn-pagina:hover {
+  background-color: #2563eb;
+}
+
+.btn-pagina.active {
+  background-color: #10b981;
 }
