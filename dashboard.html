@@ -58,24 +58,51 @@
 
       <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
       <script>
-        const ctx = document.getElementById('graficaDashboard').getContext('2d');
-        new Chart(ctx, {
-          type: 'bar',
-          data: {
-            labels: ['Entradas', 'Salidas', 'Stock'],
-            datasets: [{
-              label: 'Inventario',
-              data: [50, 30, 100], // ← aquí puedes traer valores reales
-              backgroundColor: ['#3b82f6', '#ef4444', '#10b981']
-            }]
-          },
-          options: {
-            responsive: true,
-            plugins: { legend: { display: false } },
-            scales: { y: { beginAtZero: true } }
+document.addEventListener("DOMContentLoaded", () => {
+  // Leer movimientos guardados
+  const movimientos = JSON.parse(localStorage.getItem("movimientos")) || [];
+
+  let totalEntradas = 0;
+  let totalSalidas = 0;
+
+  // Contar entradas y salidas
+  movimientos.forEach(m => {
+    if (m.tipo === "entrada") totalEntradas += m.cantidad;
+    else if (m.tipo === "salida") totalSalidas += m.cantidad;
+  });
+
+  // Calcular stock actual
+  const stockActual = totalEntradas - totalSalidas;
+
+  // Crear la gráfica con los datos reales
+  const ctx = document.getElementById('graficaDashboard').getContext('2d');
+  new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: ['Entradas', 'Salidas'],
+      datasets: [{
+        label: 'Inventario',
+        data: [totalEntradas, totalSalidas],
+        backgroundColor: ['#3b82f6', '#ef4444']
+      }]
+    },
+    options: {
+      responsive: true,
+      plugins: {
+        legend: { display: false },
+        tooltip: {
+          callbacks: {
+            label: ctx => ` ${ctx.formattedValue} unidades`
           }
-        });
-      </script>
+        }
+      },
+      scales: {
+        y: { beginAtZero: true }
+      }
+    }
+  });
+});
+</script>
     </main>
   </div>
 </body>
