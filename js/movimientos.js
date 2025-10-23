@@ -89,7 +89,7 @@ document.getElementById("formMovimiento").addEventListener("submit", e => {
 
   if (!producto || !cantidad || cantidad <= 0) {
     Swal.fire({
-      title: "❌ Por favor ingresa todos los datos correctamente.",
+      title: "Por favor ingresa todos los datos correctamente.",
       icon: "error",
       showConfirmButton: true
     });
@@ -115,13 +115,13 @@ document.getElementById("formMovimiento").addEventListener("submit", e => {
 
   if (tipo === "salida" && cantidad > stockDisponible) {
     Swal.fire({
-      title: "⚠️ Stock insuficiente",
+      title: "Stock insuficiente",
       text: `No puedes registrar una salida de ${cantidad} unidades. 
 El stock disponible para "${producto}" es de ${stockDisponible}.`,
       icon: "warning",
       confirmButtonText: "Entendido"
     });
-    return; // ❌ No guarda el movimiento
+    return; // No guarda el movimiento
   }
 
   // ==========================
@@ -135,7 +135,7 @@ El stock disponible para "${producto}" es de ${stockDisponible}.`,
   document.getElementById("formMovimiento").reset();
 
   Swal.fire({
-    title: "✅ Movimiento registrado con éxito",
+    title: "Movimiento registrado con éxito",
     icon: "success",
     timer: 1500,
     showConfirmButton: false

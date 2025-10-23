@@ -70,7 +70,7 @@ form.addEventListener('submit', e => {
 
   if (existe) {
     Swal.fire({
-      title: "⚠️ Producto duplicado",
+      title: "Producto duplicado",
       text: "Este producto ya fue registrado anteriormente.",
       icon: "warning",
       scrollbarPadding: false
@@ -84,7 +84,7 @@ form.addEventListener('submit', e => {
   form.reset();
 
   Swal.fire({
-    title: "✅ Producto agregado con éxito",
+    title: "Producto agregado con éxito",
     icon: "success",
     timer: 1500,
     showConfirmButton: false,
@@ -160,7 +160,7 @@ window.editarProducto = index => {
       };
       guardarProductos();
       Swal.fire({
-        title: "✅ Producto actualizado",
+        title: "Producto actualizado",
         icon: "success",
         timer: 1500,
         showConfirmButton: false,
